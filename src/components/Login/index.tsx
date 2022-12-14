@@ -1,4 +1,5 @@
-import axios from 'axios'
+import LoginRes from '@interfaces/LoginRes'
+import axios, { AxiosResponse } from 'axios'
 import React, { useState } from 'react'
 
 function Login() {
@@ -18,11 +19,11 @@ function Login() {
     })
   }
 
-  const login = () => {
+  const login = async () => {
     console.log(email, password)
-    axios.post('http://localhost:8080', {
+    const res = await axios.post<LoginRes>('http://localhost:8080', {
       email: email,
-      password: password
+      password: password,
     })
   }
 
@@ -41,6 +42,7 @@ function Login() {
               placeholder="example@email.com"
               value={email}
               onChange={onChange}
+              autoFocus
             />
           </div>
           <div className="mb-6">
