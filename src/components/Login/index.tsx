@@ -1,8 +1,11 @@
 import LoginRes from '@interfaces/LoginRes'
-import axios, { AxiosResponse } from 'axios'
+import { userActions } from '@slices/userSlice'
+import axios from 'axios'
 import React, { useState } from 'react'
+import { useDispatch } from 'react-redux'
 
 function Login() {
+  const dispatch = useDispatch()
   const [inputs, setInputs] = useState({
     email: '',
     password: '',
@@ -20,11 +23,13 @@ function Login() {
   }
 
   const login = async () => {
-    console.log(email, password)
     const res = await axios.post<LoginRes>('http://localhost:8080', {
       email: email,
       password: password,
     })
+
+    dispatch(userActions.setToken(res.data))
+    console.log(email, password)
   }
 
   return (
