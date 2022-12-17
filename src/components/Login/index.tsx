@@ -1,8 +1,9 @@
 import LoginRes from '@interfaces/LoginRes'
 import { userActions } from '@slices/userSlice'
-import axios from 'axios'
 import React, { useState } from 'react'
 import { useDispatch } from 'react-redux'
+import { API } from 'src/api'
+import { setToken } from 'src/utils'
 
 function Login() {
   const dispatch = useDispatch()
@@ -24,16 +25,12 @@ function Login() {
 
   const login = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
-    const res = await axios.post<LoginRes>(
-      'http://localhost:8080/api/v1/auth/login',
-      {
-        email: email,
-        password: password,
-      }
-    )
+    const res = await API.auth.post<LoginRes>('/login', {
+      email: email,
+      password: password,
+    })
 
-    localStorage.setItem('accessToken', res.data.accessToken)
-    localStorage.setItem('refreshToken', res.data.refreshToken)
+    setToken(res.data)
     dispatch(userActions.setToken(res.data))
   }
 
