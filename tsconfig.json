@@ -24,6 +24,7 @@
       "@interfaces/*": ["src/interfaces/*"],
       "@slices/*": ["src/redux/slices/*"],
       "@components/*": ["src/components/*"],
+      "@pages/*": ["src/pages/*"],
       "@store": ["src/redux/store"]
     }
   },
