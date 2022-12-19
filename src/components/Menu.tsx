@@ -1,12 +1,14 @@
+import { NavLink } from 'react-router-dom'
+
 export default function Menu() {
   const menuItems = [
     {
-      name: '신규 포스트',
-      href: '/posts',
+      name: '포스트 관리',
+      to: '/posts',
     },
     {
-      name: '포스트 관리',
-      href: '/posts',
+      name: '사용자 관리',
+      to: '/users',
     },
   ]
 
@@ -15,25 +17,36 @@ export default function Menu() {
       <h1 className="p-3 w-full text-center text-white font-bold text-2xl">
         Blog Admin
       </h1>
-      <div className="p-4">
-        {menuItems.map((item) => {
-          return <MenuItem name={item.name} href={item.href} />
-        })}
-      </div>
+      <nav className="p-2">
+        <ul>
+          {menuItems.map((item) => {
+            return <MenuItem name={item.name} to={item.to} />
+          })}
+        </ul>
+      </nav>
     </div>
   )
 }
 
 interface MenuItemProps {
   name: string
-  href: string
+  to: string
 }
 
 function MenuItem(props: MenuItemProps) {
-  const { name, href } = props
+  const { name, to } = props
   return (
-    <div className="text-white">
-      <a href={href}>{name}</a>
-    </div>
+    <li className="p-2 py-3">
+      <NavLink
+        to={to}
+        className={({ isActive }) =>
+          `hover:text-white ${
+            isActive ? 'text-white font-semibold' : 'text-gray-300'
+          } }`
+        }
+      >
+        {name}
+      </NavLink>
+    </li>
   )
 }
