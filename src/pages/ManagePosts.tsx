@@ -1,8 +1,9 @@
 import { Card } from '@components/Card'
 import Post from '@interfaces/Post'
 import { useEffect } from 'react'
+import { Link, Router } from 'react-router-dom'
 
-export default function Posts() {
+export default function ManagePosts() {
   const posts = [
     {
       id: 1,
@@ -69,7 +70,7 @@ function PostTable(props: PostTableProps) {
       </thead>
       <tbody>
         {posts.map((post) => (
-          <PostTableRow post={post} />
+          <PostTableRow post={post} key={post.id} />
         ))}
       </tbody>
     </table>
@@ -82,8 +83,12 @@ interface PostTableRowProps {
 
 function PostTableRow(props: PostTableRowProps) {
   const { post } = props
+  const rowClick = () => {}
   return (
-    <tr className="border-b last:border-none">
+    <tr
+      className="border-b last:border-none hover:bg-sky-100 hover:cursor-pointer"
+      onClick={rowClick}
+    >
       <td className="px-6 py-4">{post.id}</td>
       <td className="px-6 py-4">{post.frontMatter.title}</td>
       <td className="px-6 py-4">{post.frontMatter.date}</td>

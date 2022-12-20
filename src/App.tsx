@@ -5,7 +5,7 @@ import Home from '@pages/Home'
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import Layout from '@components/Layout'
 import Users from '@pages/Users'
-import Posts from '@pages/Posts'
+import Posts from '@pages/ManagePosts'
 
 function App() {
   const user = useSelector((state: RootState) => state.user)
@@ -17,7 +17,7 @@ function App() {
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/users" element={<Users />} />
-            <Route path="/posts" element={<Posts />} />
+            <Route path="/posts/manage" element={<Posts />} />
           </Routes>
         </Layout>
       </BrowserRouter>
