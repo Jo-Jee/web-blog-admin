@@ -11,6 +11,12 @@ export const API = {
 
 export const setAuthorizationHeader = (token: string) => {
   for (const [, client] of Object.entries(API)) {
-    client.defaults.headers['Authorization'] = `Bearer ${token}`
+    client.defaults.headers.common['Authorization'] = `Bearer ${token}`
+  }
+}
+
+export const removeAuthorizationHeader = () => {
+  for (const [, client] of Object.entries(API)) {
+    client.defaults.headers.common['Authorization'] = undefined
   }
 }

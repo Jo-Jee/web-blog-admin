@@ -19,6 +19,10 @@ export const userSlice = createSlice({
       state.accessToken = action.payload.accessToken
       state.refreshToken = action.payload.refreshToken
     },
+    removeToken: (state) => {
+      state.accessToken = null
+      state.refreshToken = null
+    },
   },
 })
 
