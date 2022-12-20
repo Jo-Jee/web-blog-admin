@@ -1,7 +1,6 @@
 import { Card } from '@components/Card'
 import Post from '@interfaces/Post'
 import { useEffect } from 'react'
-import { Link, Router } from 'react-router-dom'
 
 export default function ManagePosts() {
   const posts = [
