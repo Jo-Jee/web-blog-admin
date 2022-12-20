@@ -1,10 +1,6 @@
 import { Card } from '@components/Card'
+import User from '@interfaces/User'
 import { useEffect } from 'react'
-
-interface User {
-  id: number
-  email: string
-}
 
 export default function Users() {
   const users = [
