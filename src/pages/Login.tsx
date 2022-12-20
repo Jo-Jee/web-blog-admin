@@ -11,6 +11,7 @@ function Login() {
     email: '',
     password: '',
   })
+  const [error, setError] = useState('')
 
   const { email, password } = inputs
 
@@ -25,13 +26,27 @@ function Login() {
 
   const login = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
-    const res = await API.auth.post<LoginRes>('/login', {
-      email: email,
-      password: password,
-    })
+    const emailRegex: RegExp =
+      /^(?=.{1,254}$)(?=.{1,64}@)[-!#$%&'*+/0-9=?A-Z^_`a-z{|}~]+(\.[-!#$%&'*+/0-9=?A-Z^_`a-z{|}~]+)*@[A-Za-z0-9]([A-Za-z0-9-]{0,61}[A-Za-z0-9])?(\.[A-Za-z0-9]([A-Za-z0-9-]{0,61}[A-Za-z0-9])?)*$/
 
-    setToken(res.data)
-    dispatch(userActions.setToken(res.data))
+    if (!emailRegex.test(email)) {
+      setError('이메일을 확인해주세요.')
+      return
+    } else if (!password) {
+      setError('비밀번호를 입력해주세요.')
+      return
+    }
+    try {
+      const res = await API.auth.post<LoginRes>('/login', {
+        email: email,
+        password: password,
+      })
+
+      setToken(res.data)
+      dispatch(userActions.setToken(res.data))
+    } catch (e) {
+      setError('이메일, 비밀번호를 확인해주세요.')
+    }
   }
 
   return (
@@ -54,7 +69,7 @@ function Login() {
               autoFocus
             />
           </div>
-          <div className="mb-6">
+          <div className="mb-4">
             <label className="block text-gray-700 text-sm font-bold mb-2">
               Password
             </label>
@@ -66,6 +81,7 @@ function Login() {
               onChange={onChange}
             />
           </div>
+          {error && <div className="mb-6 text-sm text-red-500">{error}</div>}
           <div>
             <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline w-full">
               로그인
