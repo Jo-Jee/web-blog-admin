@@ -7,11 +7,11 @@ interface Props {
 
 function Layout(props: Props) {
   return (
-    <div className="flex h-screen w-screen bg-gray-50">
+    <div className="flex h-screen w-screen">
       <Menu />
-      <div className="w-full">
+      <div className="w-full h-full flex flex-col">
         <Header />
-        {props.children}
+        <div className="bg-gray-100 h-full overflow-auto">{props.children}</div>
       </div>
     </div>
   )

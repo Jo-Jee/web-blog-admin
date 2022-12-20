@@ -13,7 +13,7 @@ export default function Menu() {
   ]
 
   return (
-    <div className="bg-sky-800 w-56">
+    <div className="bg-sky-900 w-56">
       <h1 className="p-3 w-full text-center text-white font-bold text-2xl">
         Blog Admin
       </h1>
