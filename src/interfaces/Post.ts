@@ -1,7 +1,10 @@
-import FrontMatter from '@interfaces/FrontMatter'
-
 export default interface Post {
   id?: number
-  frontMatter: FrontMatter
+  title: string
+  summary: string
+  topic: string
+  tags: string[]
+  date: string
+  published: boolean
   body: string
 }

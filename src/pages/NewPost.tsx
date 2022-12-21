@@ -3,14 +3,12 @@ import EditPost from '@components/EditPost'
 
 export default function NewPost() {
   const newPost = {
-    frontMatter: {
-      title: '',
-      summary: '',
-      topic: '',
-      tags: [],
-      date: '',
-      published: false,
-    },
+    title: '',
+    summary: '',
+    topic: '',
+    tags: [],
+    date: '',
+    published: false,
     body: '',
   }
 

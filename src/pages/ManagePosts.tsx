@@ -6,38 +6,32 @@ export default function ManagePosts() {
   const posts = [
     {
       id: 1,
-      frontMatter: {
-        title: 'title',
-        summary: 'summary',
-        topic: 'topic',
-        tags: ['tag1', 'tag2'],
-        date: 'date',
-        published: true,
-      },
+      title: 'title',
+      summary: 'summary',
+      topic: 'topic',
+      tags: ['tag1', 'tag2'],
+      date: 'date',
+      published: true,
       body: 'body',
     },
     {
       id: 2,
-      frontMatter: {
-        title: 'title2',
-        summary: 'summary2',
-        topic: 'topic2',
-        tags: ['tag12', 'tag22'],
-        date: 'date2',
-        published: true,
-      },
+      title: 'title2',
+      summary: 'summary2',
+      topic: 'topic2',
+      tags: ['tag12', 'tag22'],
+      date: 'date2',
+      published: true,
       body: 'body2',
     },
     {
       id: 3,
-      frontMatter: {
-        title: 'title3',
-        summary: 'summary3',
-        topic: 'topic3',
-        tags: ['tag13', 'tag23'],
-        date: 'date3',
-        published: true,
-      },
+      title: 'title3',
+      summary: 'summary3',
+      topic: 'topic3',
+      tags: ['tag13', 'tag23'],
+      date: 'date3',
+      published: true,
       body: 'body3',
     },
   ]
@@ -89,8 +83,8 @@ function PostTableRow(props: PostTableRowProps) {
       onClick={rowClick}
     >
       <td className="px-6 py-4">{post.id}</td>
-      <td className="px-6 py-4">{post.frontMatter.title}</td>
-      <td className="px-6 py-4">{post.frontMatter.date}</td>
+      <td className="px-6 py-4">{post.title}</td>
+      <td className="px-6 py-4">{post.date}</td>
     </tr>
   )
 }

@@ -21,11 +21,11 @@ export default function EditPost(props: EditPostProps) {
           <Label>Title</Label>
           <Input
             type="text"
-            value={post.frontMatter.title}
+            value={post.title}
             onChange={(e) => {
               setPost({
                 ...post,
-                frontMatter: { ...post.frontMatter, title: e.target.value },
+                title: e.target.value,
               })
             }}
             autoFocus
@@ -44,10 +44,7 @@ export default function EditPost(props: EditPostProps) {
             onChange={(e) => {
               setPost({
                 ...post,
-                frontMatter: {
-                  ...post.frontMatter,
-                  tags: e.target.value.split(',').map((tag) => tag.trim()),
-                },
+                tags: e.target.value.split(',').map((tag) => tag.trim()),
               })
               console.log(post)
             }}
@@ -56,14 +53,11 @@ export default function EditPost(props: EditPostProps) {
         <span className="m-1">
           <Label>Published</Label>
           <Toggle
-            checked={post.frontMatter.published}
+            checked={post.published}
             onChange={(e) => {
               setPost({
                 ...post,
-                frontMatter: {
-                  ...post.frontMatter,
-                  published: e.target.checked,
-                },
+                published: e.target.checked,
               })
             }}
           />
@@ -78,7 +72,7 @@ export default function EditPost(props: EditPostProps) {
             onChange={(e) => {
               setPost({
                 ...post,
-                frontMatter: { ...post.frontMatter, summary: e.target.value },
+                summary: e.target.value,
               })
             }}
           />
