@@ -9,9 +9,11 @@ function Layout(props: Props) {
   return (
     <div className="flex h-screen w-screen">
       <Menu />
-      <div className="w-full h-full flex flex-col">
+      <div className="grow flex flex-col">
         <Header />
-        <div className="bg-gray-100 h-full overflow-auto">{props.children}</div>
+        <div className="bg-gray-100 grow h-full overflow-scroll">
+          {props.children}
+        </div>
       </div>
     </div>
   )

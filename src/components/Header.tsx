@@ -10,7 +10,7 @@ export default function Header() {
     setShowSetting(!showSetting)
   }
   return (
-    <div className="bg-white drop-shadow h-16 flex justify-between items-center px-8">
+    <div className="bg-white drop-shadow h-16 shrink-0 grow-0 flex justify-between items-center px-8">
       <div>이거</div>
       <div
         className="flex items-center hover:cursor-pointer"

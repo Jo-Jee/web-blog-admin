@@ -1,7 +1,7 @@
 import FrontMatter from '@interfaces/FrontMatter'
 
 export default interface Post {
-  id: number
+  id?: number
   frontMatter: FrontMatter
   body: string
 }
