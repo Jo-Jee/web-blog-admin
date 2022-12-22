@@ -48,6 +48,9 @@ export default function EditPost(props: EditPostProps) {
         <span className="flex-1 m-1">
           <Label>Topic</Label>
           <Select>
+            <option value={0} selected disabled hidden>
+              토픽을 선택해주세요
+            </option>
             {topics.map((topic) => {
               return (
                 <option value={topic.id} key={topic.id}>
