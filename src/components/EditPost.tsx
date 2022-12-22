@@ -5,7 +5,9 @@ import Toggle from '@components/Toggle'
 import Select from '@components/Select'
 import ReactMarkdown from 'react-markdown'
 import remarkGfm from 'remark-gfm'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
+import { API } from 'src/api'
+import Topic from '@interfaces/Topic'
 
 interface EditPostProps {
   post: Post
@@ -13,6 +15,16 @@ interface EditPostProps {
 
 export default function EditPost(props: EditPostProps) {
   const [post, setPost] = useState<Post>(props.post)
+  const [topics, setTopics] = useState<Topic[]>([])
+
+  useEffect(() => {
+    async function getTopics() {
+      var topics = await API.blog.get<Topic[]>('/topics')
+      setTopics(topics.data)
+    }
+
+    getTopics()
+  }, [])
 
   return (
     <div className="flex flex-col flex-1">
@@ -35,7 +47,15 @@ export default function EditPost(props: EditPostProps) {
       <div className="flex">
         <span className="flex-1 m-1">
           <Label>Topic</Label>
-          <Select></Select>
+          <Select>
+            {topics.map((topic) => {
+              return (
+                <option value={topic.id} key={topic.id}>
+                  {topic.name}
+                </option>
+              )
+            })}
+          </Select>
         </span>
         <span className="flex-1 m-1">
           <Label>Tags</Label>

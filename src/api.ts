@@ -7,6 +7,9 @@ export const API = {
   user: axios.create({
     baseURL: `${process.env.REACT_APP_API}/api/v1/user`,
   }),
+  blog: axios.create({
+    baseURL: `${process.env.REACT_APP_API}/api/v1/blog`,
+  }),
 }
 
 export const setAuthorizationHeader = (token: string) => {
