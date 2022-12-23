@@ -2,7 +2,7 @@ export default interface Post {
   id?: number
   title: string
   summary: string
-  topic: string
+  topicId: number
   tags: string[]
   date: string
   published: boolean

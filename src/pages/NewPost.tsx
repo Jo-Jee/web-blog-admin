@@ -5,7 +5,7 @@ export default function NewPost() {
   const newPost = {
     title: '',
     summary: '',
-    topic: '',
+    topicId: 0,
     tags: [],
     date: '',
     published: false,

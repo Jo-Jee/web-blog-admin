@@ -16,6 +16,14 @@ interface EditPostProps {
 export default function EditPost(props: EditPostProps) {
   const [post, setPost] = useState<Post>(props.post)
   const [topics, setTopics] = useState<Topic[]>([])
+  const onSubmit = async () => {
+    const method = post.id ? 'PUT' : 'POST'
+
+    await API.blog(`/posts${post.id ? `/${post.id}` : ''}`, {
+      method: method,
+      data: post,
+    })
+  }
 
   useEffect(() => {
     async function getTopics() {
@@ -47,8 +55,13 @@ export default function EditPost(props: EditPostProps) {
       <div className="flex">
         <span className="flex-1 m-1">
           <Label>Topic</Label>
-          <Select>
-            <option value={0} selected disabled hidden>
+          <Select
+            value={post.topicId}
+            onChange={(e) => {
+              post.topicId = +e.target.value
+            }}
+          >
+            <option value={0} disabled hidden>
               토픽을 선택해주세요
             </option>
             {topics.map((topic) => {
@@ -69,7 +82,6 @@ export default function EditPost(props: EditPostProps) {
                 ...post,
                 tags: e.target.value.split(',').map((tag) => tag.trim()),
               })
-              console.log(post)
             }}
           />
         </span>
@@ -123,7 +135,10 @@ export default function EditPost(props: EditPostProps) {
         </span>
       </div>
       <div className="mt-3 flex justify-end px-3">
-        <button className="bg-sky-900 text-white px-3 py-1 rounded">
+        <button
+          className="bg-sky-900 text-white px-3 py-1 rounded"
+          onClick={onSubmit}
+        >
           확인
         </button>
       </div>
