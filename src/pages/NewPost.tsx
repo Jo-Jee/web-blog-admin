@@ -7,7 +7,6 @@ export default function NewPost() {
     summary: '',
     topicId: 0,
     tags: [],
-    date: '',
     published: false,
     body: '',
   }

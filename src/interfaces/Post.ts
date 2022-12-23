@@ -4,7 +4,8 @@ export default interface Post {
   summary: string
   topicId: number
   tags: string[]
-  date: string
   published: boolean
   body: string
+  createdAt?: string
+  updatedAt?: string
 }

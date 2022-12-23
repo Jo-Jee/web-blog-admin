@@ -34,6 +34,10 @@ export default function EditPost(props: EditPostProps) {
     getTopics()
   }, [])
 
+  useEffect(() => {
+    setPost(props.post)
+  }, [props])
+
   return (
     <div className="flex flex-col flex-1">
       <div className="flex">
@@ -77,6 +81,7 @@ export default function EditPost(props: EditPostProps) {
           <Label>Tags</Label>
           <Input
             type="text"
+            value={post.tags}
             onChange={(e) => {
               setPost({
                 ...post,
@@ -104,6 +109,7 @@ export default function EditPost(props: EditPostProps) {
           <Input
             name="summary"
             type="text"
+            value={post.summary}
             onChange={(e) => {
               setPost({
                 ...post,
