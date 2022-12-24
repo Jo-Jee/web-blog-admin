@@ -62,7 +62,10 @@ export default function EditPost(props: EditPostProps) {
           <Select
             value={post.topicId}
             onChange={(e) => {
-              post.topicId = +e.target.value
+              setPost({
+                ...post,
+                topicId: +e.target.value,
+              })
             }}
           >
             <option value={0} disabled hidden>
