@@ -73,7 +73,7 @@ export default function ManagePosts() {
 
   function PostTable() {
     return (
-      <div>
+      <div className="w-full">
         <table className="table-auto w-full">
           <thead>
             <tr className="border-b">
