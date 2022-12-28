@@ -2,26 +2,18 @@ import LoginRes from '@interfaces/LoginRes'
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 
 export interface UserState {
-  accessToken: string | null
-  refreshToken: string | null
+  uid?: number
 }
 
-const initialState: UserState = {
-  accessToken: localStorage.getItem('accessToken'),
-  refreshToken: localStorage.getItem('refreshToken'),
-}
+const initialState: UserState = {}
 
 export const userSlice = createSlice({
   name: 'user',
   initialState,
   reducers: {
-    setToken: (state, action: PayloadAction<LoginRes>) => {
-      state.accessToken = action.payload.accessToken
-      state.refreshToken = action.payload.refreshToken
-    },
-    removeToken: (state) => {
-      state.accessToken = null
-      state.refreshToken = null
+    setUser: (state, action: PayloadAction<LoginRes>) => {},
+    clearUser: (state) => {
+      state.uid = undefined
     },
   },
 })

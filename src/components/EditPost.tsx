@@ -6,7 +6,7 @@ import Select from '@components/Select'
 import ReactMarkdown from 'react-markdown'
 import remarkGfm from 'remark-gfm'
 import { useEffect, useState } from 'react'
-import { API } from 'src/api'
+import { API } from '@utils/api'
 import Topic from '@interfaces/Topic'
 
 interface EditPostProps {

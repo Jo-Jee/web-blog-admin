@@ -1,7 +1,7 @@
 import { userActions } from '@slices/userSlice'
 import { useState } from 'react'
 import { useDispatch } from 'react-redux'
-import { removeToken } from 'src/utils'
+import { removeToken } from '@utils/token'
 
 export default function Header() {
   const [showSetting, setShowSetting] = useState(false)
@@ -27,7 +27,7 @@ export default function Header() {
 function SettingPanel() {
   const dispatch = useDispatch()
   const onLogout = () => {
-    dispatch(userActions.removeToken())
+    dispatch(userActions.clearUser())
     removeToken()
   }
   return (

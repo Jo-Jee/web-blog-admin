@@ -1,9 +1,9 @@
 import LoginRes from '@interfaces/LoginRes'
-import { userActions } from '@slices/userSlice'
 import React, { useState } from 'react'
 import { useDispatch } from 'react-redux'
-import { API } from 'src/api'
-import { setToken } from 'src/utils'
+import { API } from 'src/utils/api'
+import { setToken } from '@utils/token'
+import { userActions } from '@slices/userSlice'
 
 function Login() {
   const dispatch = useDispatch()
@@ -43,7 +43,7 @@ function Login() {
       })
 
       setToken(res.data)
-      dispatch(userActions.setToken(res.data))
+      // dispatch(userActions.setUser())
     } catch (e) {
       setError('이메일, 비밀번호를 확인해주세요.')
     }

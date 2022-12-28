@@ -11,7 +11,7 @@ import NewPost from '@pages/NewPost'
 function App() {
   const user = useSelector((state: RootState) => state.user)
 
-  if (user.accessToken && user.refreshToken)
+  if (user.uid)
     return (
       <BrowserRouter>
         <Layout>

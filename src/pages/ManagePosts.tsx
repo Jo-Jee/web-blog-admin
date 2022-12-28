@@ -2,7 +2,7 @@ import { Card } from '@components/Card'
 import EditPost from '@components/EditPost'
 import Post from '@interfaces/Post'
 import { useEffect, useState } from 'react'
-import { API } from 'src/api'
+import { API } from '@utils/api'
 
 interface PostTableRowProps {
   post: Post
