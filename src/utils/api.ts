@@ -2,7 +2,7 @@ import axios from 'axios'
 
 export const API = {
   auth: createAPIClient(`${process.env.REACT_APP_API}/api/v1/auth`),
-  user: createAPIClient(`${process.env.REACT_APP_API}/api/v1/user`),
+  user: createAPIClient(`${process.env.REACT_APP_API}/api/v1/users`),
   blog: createAPIClient(`${process.env.REACT_APP_API}/api/v1/blog`),
 }
 
@@ -29,7 +29,6 @@ function createAPIClient(url: string) {
 
   client.interceptors.response.use(
     (res) => {
-      console.log(res)
       return res
     },
     async (err) => {
@@ -37,8 +36,6 @@ function createAPIClient(url: string) {
         config,
         response: { status },
       } = err
-
-      console.log(status)
       return Promise.reject(err)
     }
   )

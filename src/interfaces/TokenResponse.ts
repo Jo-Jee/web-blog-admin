@@ -1,4 +1,4 @@
-export default interface LoginRes {
+export default interface TokenResponse {
   accessToken: string
   refreshToken: string
 }

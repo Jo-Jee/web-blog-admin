@@ -1,33 +1,64 @@
 import AccessTokenPayload from '@interfaces/AccessTokenPayload'
-import LoginRes from '@interfaces/LoginRes'
 import RefreshTokenPayload from '@interfaces/RefreshTokenPayload'
+import TokenResponse from '@interfaces/TokenResponse'
 import jwtDecode from 'jwt-decode'
-import { removeAuthorizationHeader, setAuthorizationHeader } from './api'
+import { API, removeAuthorizationHeader, setAuthorizationHeader } from './api'
 
-export function setToken(tokens: LoginRes) {
-  const { accessToken, refreshToken } = tokens
-  const accessTokenPayload = jwtDecode<AccessTokenPayload>(accessToken)
-  const refreshTokenPayload = jwtDecode<RefreshTokenPayload>(refreshToken)
-  const accessTokenExp = accessTokenPayload.exp
-  const refreshTokenExp = refreshTokenPayload.exp
-  const now = Date.now()
-
-  if (now > accessTokenExp || now > refreshTokenExp)
+export function setToken(accessToken: string, refreshToken: string) {
+  if (!validateToken(accessToken) || !validateToken(refreshToken))
     throw Error('token expired')
 
   localStorage.setItem('accessToken', accessToken)
   localStorage.setItem('refreshToken', refreshToken)
-  localStorage.setItem('accessTokenExp', accessTokenExp.toString())
-  localStorage.setItem('refreshToken', refreshTokenExp.toString())
 
-  setAuthorizationHeader(tokens.accessToken)
+  setAuthorizationHeader(accessToken)
 }
 
 export function removeToken() {
   localStorage.removeItem('accessToken')
   localStorage.removeItem('refreshToken')
-  localStorage.removeItem('accessTokenExp')
-  localStorage.seremoveItemtItem('refreshToken')
 
   removeAuthorizationHeader()
+}
+
+export function reloadToken() {
+  const accessToken = localStorage.getItem('accessToken')
+
+  if (!accessToken) throw Error('Access Token missing')
+
+  if (validateToken(accessToken)) {
+    setAuthorizationHeader(accessToken)
+  } else {
+    const refreshToken = localStorage.getItem('refreshToken')
+    if (!refreshToken) throw Error('Refresh Token missing')
+    if (validateToken(refreshToken)) {
+      reissueToken(refreshToken)
+    }
+  }
+
+  return false
+}
+
+function validateToken(token: string) {
+  try {
+    const tokenExp = jwtDecode<AccessTokenPayload | RefreshTokenPayload>(
+      token
+    ).exp
+    const now = Date.now()
+
+    return now > tokenExp
+  } catch (e) {
+    removeToken()
+    return false
+  }
+}
+
+async function reissueToken(refreshToken: string) {
+  const res = await API.auth.get<TokenResponse>('/reissue', {
+    data: {
+      refreshToken: refreshToken,
+    },
+  })
+
+  setToken(res.data.accessToken, res.data.refreshToken)
 }
