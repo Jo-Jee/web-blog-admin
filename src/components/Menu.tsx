@@ -1,17 +1,17 @@
 import { NavLink } from 'react-router-dom'
 
-interface MenuItem {
+interface MenuInfo {
   name: string
   to: string
 }
 
-interface MenuItemGroup {
+interface MenuGroupInfo {
   name: string
-  menuItems: MenuItem[]
+  menuItems: MenuInfo[]
 }
 
 export default function Menu() {
-  const menuGroups: Array<MenuItemGroup> = [
+  const menuGroups: Array<MenuGroupInfo> = [
     {
       name: '포스트',
       menuItems: [
@@ -53,7 +53,7 @@ export default function Menu() {
 }
 
 interface MenuItemProps {
-  item: MenuItem
+  item: MenuInfo
 }
 
 function MenuItem(props: MenuItemProps) {
@@ -74,11 +74,11 @@ function MenuItem(props: MenuItemProps) {
   )
 }
 
-interface MenuItemGroupProps {
-  group: MenuItemGroup
+interface MenuGroupProps {
+  group: MenuGroupInfo
 }
 
-function MenuItemGroup(props: MenuItemGroupProps) {
+function MenuItemGroup(props: MenuGroupProps) {
   const { name, menuItems } = props.group
   return (
     <div>

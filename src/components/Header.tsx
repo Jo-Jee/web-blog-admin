@@ -18,6 +18,7 @@ export default function Header() {
         onClick={onProfileClick}
       >
         <img
+          alt="profile"
           className="rounded-full w-10 h-10 bg-slate-200"
           src="https://d11a6trkgmumsb.cloudfront.net/original/3X/d/8/d8b5d0a738295345ebd8934b859fa1fca1c8c6ad.jpeg"
         ></img>

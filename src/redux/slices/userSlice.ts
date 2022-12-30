@@ -1,6 +1,5 @@
-import LoginRes from '@interfaces/TokenResponse'
 import User from '@interfaces/User'
-import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit'
+import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
 import { API } from '@utils/api'
 import { removeToken } from '@utils/token'
 

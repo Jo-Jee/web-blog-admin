@@ -21,7 +21,7 @@ function App() {
     } catch (error) {
       dispatch(userActions.clearUser())
     }
-  }, [])
+  }, [dispatch])
 
   switch (status) {
     case 'login':

@@ -67,6 +67,7 @@ export default function DataTable(props: Props) {
     }
 
     getPosts()
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [pageInfo.curPage])
 
   return (

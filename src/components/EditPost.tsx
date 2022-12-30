@@ -8,6 +8,7 @@ import remarkGfm from 'remark-gfm'
 import { useEffect, useState } from 'react'
 import { API } from '@utils/api'
 import Topic from '@interfaces/Topic'
+import { useNavigate } from 'react-router-dom'
 
 interface EditPostProps {
   item: Post
@@ -16,6 +17,8 @@ interface EditPostProps {
 export default function EditPost(props: EditPostProps) {
   const [post, setPost] = useState<Post>(props.item)
   const [topics, setTopics] = useState<Topic[]>([])
+  const navigate = useNavigate()
+
   const onSubmit = async () => {
     const method = post.id ? 'PUT' : 'POST'
 
@@ -23,6 +26,8 @@ export default function EditPost(props: EditPostProps) {
       method: method,
       data: post,
     })
+
+    navigate('/posts/manage')
   }
 
   useEffect(() => {
