@@ -123,7 +123,7 @@ export default function EditPost(props: EditPostProps) {
         </span>
       </div>
       <div className="mt-3 flex flex-1">
-        <span className="flex w-1/2 p-1">
+        <div className="flex w-1/2 p-1">
           <textarea
             name="body"
             placeholder="Body"
@@ -133,15 +133,17 @@ export default function EditPost(props: EditPostProps) {
               setPost({ ...post, body: e.target.value })
             }}
           />
-        </span>
-        <span className="flex w-1/2 p-1">
-          <ReactMarkdown
-            className="grow max-w-4xl overflow-hidden border shadow rounded px-3 prose"
-            remarkPlugins={[remarkGfm]}
-          >
-            {post.body}
-          </ReactMarkdown>
-        </span>
+        </div>
+        <div className="flex w-1/2 p-1 overflow-hidden">
+          <div className="flex flex-1 border shadow rounded overflow-scroll">
+            <ReactMarkdown
+              className="grow max-w-xl p-3 prose"
+              remarkPlugins={[remarkGfm]}
+            >
+              {post.body}
+            </ReactMarkdown>
+          </div>
+        </div>
       </div>
       <div className="mt-3 flex justify-end px-3">
         <button
