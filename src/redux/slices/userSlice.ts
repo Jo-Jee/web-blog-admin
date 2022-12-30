@@ -36,7 +36,6 @@ export const userSlice = createSlice({
         state.status = 'loading'
       })
       .addCase(getMyProfile.rejected, (state) => {
-        removeToken()
         state.status = 'logout'
       })
   },
