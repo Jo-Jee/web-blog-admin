@@ -26,6 +26,8 @@ interface PageInfoState {
 }
 
 export default function DataTable(props: Props) {
+  const { client, url, EditComponent, title, tableHeadKeyTitle } = props
+
   const [pageInfo, setPageInfo] = useState<PageInfoState>({
     curPage: 0,
     totalPage: 0,
@@ -34,10 +36,9 @@ export default function DataTable(props: Props) {
     items: [],
     selectedItem: undefined,
   })
+
   const { curPage, totalPage, pageSize, pageNavIndex, items, selectedItem } =
     pageInfo
-
-  const { client, url, EditComponent, title, tableHeadKeyTitle } = props
 
   useEffect(() => {
     async function getPosts() {
