@@ -10,11 +10,11 @@ import { API } from '@utils/api'
 import Topic from '@interfaces/Topic'
 
 interface EditPostProps {
-  post: Post
+  item: Post
 }
 
 export default function EditPost(props: EditPostProps) {
-  const [post, setPost] = useState<Post>(props.post)
+  const [post, setPost] = useState<Post>(props.item)
   const [topics, setTopics] = useState<Topic[]>([])
   const onSubmit = async () => {
     const method = post.id ? 'PUT' : 'POST'
@@ -35,7 +35,7 @@ export default function EditPost(props: EditPostProps) {
   }, [])
 
   useEffect(() => {
-    setPost(props.post)
+    setPost(props.item)
   }, [props])
 
   return (

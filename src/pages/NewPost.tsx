@@ -13,7 +13,7 @@ export default function NewPost() {
 
   return (
     <Card stretch title="신규 포스트">
-      <EditPost post={newPost} />
+      <EditPost item={newPost} />
     </Card>
   )
 }
