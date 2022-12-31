@@ -15,12 +15,16 @@ function App() {
   const { status } = useAppSelector((state) => state.user)
 
   useEffect(() => {
-    try {
-      reloadToken()
-      dispatch(getMyProfile())
-    } catch (error) {
-      dispatch(userActions.clearUser())
+    const reload = async () => {
+      try {
+        await reloadToken()
+        dispatch(getMyProfile())
+      } catch (error) {
+        dispatch(userActions.clearUser())
+      }
     }
+
+    reload()
   }, [dispatch])
 
   switch (status) {

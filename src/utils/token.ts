@@ -21,7 +21,7 @@ export function removeToken() {
   removeAuthorizationHeader()
 }
 
-export function reloadToken() {
+export async function reloadToken() {
   const accessToken = localStorage.getItem('accessToken')
 
   if (!accessToken) throw Error('Access Token missing')
@@ -32,14 +32,14 @@ export function reloadToken() {
     const refreshToken = localStorage.getItem('refreshToken')
     if (!refreshToken) throw Error('Refresh Token missing')
     if (validateToken(refreshToken)) {
-      reissueToken(refreshToken)
+      await reissueToken(refreshToken)
     }
   }
 
   return false
 }
 
-function validateToken(token: string) {
+export function validateToken(token: string) {
   try {
     const tokenExp = jwtDecode<AccessTokenPayload | RefreshTokenPayload>(
       token
@@ -48,16 +48,13 @@ function validateToken(token: string) {
 
     return now > tokenExp
   } catch (e) {
-    removeToken()
     return false
   }
 }
 
-async function reissueToken(refreshToken: string) {
-  const res = await API.auth.get<TokenResponse>('/reissue', {
-    data: {
-      refreshToken: refreshToken,
-    },
+export async function reissueToken(refreshToken: string) {
+  const res = await API.auth.post<TokenResponse>('/reissue', {
+    refreshToken: refreshToken,
   })
 
   setToken(res.data.accessToken, res.data.refreshToken)
