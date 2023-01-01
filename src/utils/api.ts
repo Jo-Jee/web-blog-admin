@@ -25,13 +25,15 @@ function createAPIClient(url: string) {
   })
 
   client.interceptors.request.use(async (config) => {
+    if (config.baseURL === `${process.env.REACT_APP_API}/api/v1/auth`)
+      return config
+
     config.headers = config.headers ?? {}
     const token = config.headers.Authorization?.toString().substring(
       'Bearer '.length
     )
 
     if (token) {
-      console.log(token)
       if (!validateToken(token)) {
         const refreshToken = localStorage.getItem('refreshToken')
 
