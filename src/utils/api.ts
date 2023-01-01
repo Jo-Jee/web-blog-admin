@@ -25,16 +25,22 @@ function createAPIClient(url: string) {
   })
 
   client.interceptors.request.use(async (config) => {
-    const token = config.headers?.Authorization?.toString().substring(
+    config.headers = config.headers ?? {}
+    const token = config.headers.Authorization?.toString().substring(
       'Bearer '.length
     )
-    console.log(token)
 
     if (token) {
+      console.log(token)
       if (!validateToken(token)) {
-        const controller = new AbortController()
-        console.log('??')
-        controller.abort()
+        const refreshToken = localStorage.getItem('refreshToken')
+
+        if (refreshToken) {
+          if (validateToken(refreshToken)) {
+            const newToken = await reissueToken(refreshToken)
+            config.headers.Authorization = `Bearer ${newToken}`
+          }
+        }
       }
     }
 

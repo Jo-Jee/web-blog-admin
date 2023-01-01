@@ -41,12 +41,11 @@ export async function reloadToken() {
 
 export function validateToken(token: string) {
   try {
-    const tokenExp = jwtDecode<AccessTokenPayload | RefreshTokenPayload>(
-      token
-    ).exp
+    const tokenExp =
+      jwtDecode<AccessTokenPayload | RefreshTokenPayload>(token).exp * 1000
     const now = Date.now()
 
-    return now > tokenExp
+    return now < tokenExp
   } catch (e) {
     return false
   }
@@ -58,4 +57,6 @@ export async function reissueToken(refreshToken: string) {
   })
 
   setToken(res.data.accessToken, res.data.refreshToken)
+
+  return res.data.accessToken
 }
