@@ -33,17 +33,11 @@ function createAPIClient(url: string) {
       'Bearer '.length
     )
 
-    if (token) {
-      if (!validateToken(token)) {
-        const refreshToken = localStorage.getItem('refreshToken')
-
-        if (refreshToken) {
-          if (validateToken(refreshToken)) {
-            const newToken = await reissueToken(refreshToken)
-            config.headers.Authorization = `Bearer ${newToken}`
-          }
-        }
-      }
+    if (token && !validateToken(token)) {
+      try {
+        const newToken = await reissueToken()
+        config.headers.Authorization = `Bearer ${newToken}`
+      } catch (e) {}
     }
 
     return config
@@ -58,7 +52,19 @@ function createAPIClient(url: string) {
         config,
         response: { status },
       } = err
-      return Promise.reject(err)
+
+      if (
+        config.baseURL === `${process.env.REACT_APP_API}/api/v1/auth` ||
+        status !== 401
+      )
+        return Promise.reject(err)
+
+      try {
+        const accessToken = await reissueToken()
+        config.headers.Authorization = `Bearer ${accessToken}`
+      } catch (e) {}
+
+      return axios(config)
     }
   )
   return client

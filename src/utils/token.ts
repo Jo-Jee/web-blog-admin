@@ -29,11 +29,7 @@ export async function reloadToken() {
   if (validateToken(accessToken)) {
     setAuthorizationHeader(accessToken)
   } else {
-    const refreshToken = localStorage.getItem('refreshToken')
-    if (!refreshToken) throw Error('Refresh Token missing')
-    if (validateToken(refreshToken)) {
-      await reissueToken(refreshToken)
-    }
+    await reissueToken()
   }
 
   return false
@@ -51,7 +47,13 @@ export function validateToken(token: string) {
   }
 }
 
-export async function reissueToken(refreshToken: string) {
+export async function reissueToken() {
+  const refreshToken = localStorage.getItem('refreshToken')
+
+  if (!refreshToken) throw Error('No refresh token')
+
+  if (!validateToken(refreshToken)) throw Error('Refresh token expired')
+
   const res = await API.auth.post<TokenResponse>('/reissue', {
     refreshToken: refreshToken,
   })
