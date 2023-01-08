@@ -41,7 +41,7 @@ export default function DataTable(props: Props) {
     pageInfo
 
   useEffect(() => {
-    async function getPosts() {
+    async function getItems() {
       let navPagesIndexes: number[] = []
       let basePage = curPage - 2
 
@@ -66,7 +66,7 @@ export default function DataTable(props: Props) {
       })
     }
 
-    getPosts()
+    getItems()
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [pageInfo.curPage])
 

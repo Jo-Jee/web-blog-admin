@@ -13,7 +13,7 @@ interface MenuGroupInfo {
 export default function Menu() {
   const menuGroups: Array<MenuGroupInfo> = [
     {
-      name: '포스트',
+      name: '블로그',
       menuItems: [
         {
           name: '포스트 관리',
@@ -22,6 +22,10 @@ export default function Menu() {
         {
           name: '신규 포스트',
           to: '/posts/new',
+        },
+        {
+          name: '토픽 관리',
+          to: '/topics',
         },
       ],
     },

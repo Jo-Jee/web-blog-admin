@@ -9,6 +9,7 @@ import NewPost from '@pages/NewPost'
 import { getMyProfile, userActions } from '@slices/userSlice'
 import { reloadToken } from '@utils/token'
 import { useEffect } from 'react'
+import ManageTopics from '@pages/ManageTopics'
 
 function App() {
   const dispatch = useAppDispatch()
@@ -37,6 +38,7 @@ function App() {
               <Route path="/users" element={<Users />} />
               <Route path="/posts/manage" element={<ManagePosts />} />
               <Route path="/posts/new" element={<NewPost />} />
+              <Route path="/topics" element={<ManageTopics />} />
             </Routes>
           </Layout>
         </BrowserRouter>
