@@ -42,10 +42,25 @@ export default function EditPost(props: EditPostProps) {
   useEffect(() => {
     const fetchPost = async () => {
       const id = props.item.id
+      let post: Post
 
-      const res = await API.blog.get<Post>(`/posts/${id}`)
+      if (id) {
+        const res = await API.blog.get<Post>(`/posts/${id}`)
+        post = res.data
+      } else {
+        post = {
+          title: '',
+          summary: '',
+          topicId: 0,
+          tags: [],
+          published: false,
+          body: '',
+          createdAt: '',
+          updatedAt: '',
+        }
+      }
 
-      setPost(res.data)
+      setPost(post)
     }
 
     fetchPost()
