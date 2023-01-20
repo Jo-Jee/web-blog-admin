@@ -1,7 +1,6 @@
 import Login from 'src/pages/Login'
 import { useAppDispatch, useAppSelector } from '@store'
-import Home from '@pages/Home'
-import { BrowserRouter, Route, Routes } from 'react-router-dom'
+import { BrowserRouter, Route, Routes, Navigate } from 'react-router-dom'
 import Layout from '@components/Layout'
 import Users from '@pages/Users'
 import ManagePosts from '@pages/ManagePosts'
@@ -34,7 +33,7 @@ function App() {
         <BrowserRouter>
           <Layout>
             <Routes>
-              <Route path="/" element={<Home />} />
+              <Route path="/" element={<Navigate to="/posts/manage" />} />
               <Route path="/users" element={<Users />} />
               <Route path="/posts/manage" element={<ManagePosts />} />
               <Route path="/posts/new" element={<NewPost />} />
