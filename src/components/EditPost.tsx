@@ -28,6 +28,7 @@ export default function EditPost(props: EditPostProps) {
     })
 
     navigate('/posts/manage')
+    window.location.reload()
   }
 
   useEffect(() => {
