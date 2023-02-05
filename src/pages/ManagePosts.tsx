@@ -14,7 +14,7 @@ export default function ManagePosts() {
         title: { title: 'Title' },
         createdAt: { title: 'Created At', width: 'w-36', type: 'date' },
         updatedAt: { title: 'Updated At', width: 'w-36', type: 'date' },
-        publishedAt: { title: 'Published At', width: 'w-40', type: 'date' },
+        publishedAt: { title: 'Published At', width: 'w-48' },
         published: { title: 'Pub', width: 'w-20', type: 'boolean' },
       }}
     />

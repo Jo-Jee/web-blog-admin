@@ -124,6 +124,19 @@ export default function EditPost(props: EditPostProps) {
               }}
             />
           </span>
+          <span className="flex-1 m-1">
+            <Label>Published At</Label>
+            <Input
+              type="text"
+              value={post.publishedAt}
+              onChange={(e) => {
+                setPost({
+                  ...post,
+                  publishedAt: e.target.value,
+                })
+              }}
+            />
+          </span>
           <span className="m-1">
             <Label>Published</Label>
             <Toggle

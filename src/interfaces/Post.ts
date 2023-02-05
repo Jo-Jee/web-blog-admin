@@ -8,4 +8,5 @@ export default interface Post {
   body: string
   createdAt?: string
   updatedAt?: string
+  publishedAt?: string
 }
