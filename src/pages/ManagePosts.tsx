@@ -6,7 +6,7 @@ export default function ManagePosts() {
   return (
     <DataTable
       EditComponent={EditPost}
-      client={API.blog}
+      client={API.admin}
       url="/posts"
       title="포스트"
       tableHeadKeyTitle={{

@@ -60,7 +60,7 @@ export default function ManageTopics() {
     const submitClick = async () => {
       try {
         const method = topic.id ? 'PUT' : 'POST'
-        const res = await API.blog<Topic>(
+        const res = await API.admin<Topic>(
           `/topics${topic.id ? `/${topic.id}` : ''}`,
           {
             method: method,

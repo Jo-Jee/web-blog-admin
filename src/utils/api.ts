@@ -5,6 +5,7 @@ export const API = {
   auth: createAPIClient(`${process.env.REACT_APP_API}/api/v1/auth`),
   user: createAPIClient(`${process.env.REACT_APP_API}/api/v1/users`),
   blog: createAPIClient(`${process.env.REACT_APP_API}/api/v1/blog`),
+  admin: createAPIClient(`${process.env.REACT_APP_API}/api/v1/admin`),
 }
 
 export const setAuthorizationHeader = (token: string) => {
