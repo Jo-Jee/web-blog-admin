@@ -49,16 +49,7 @@ export default function EditPost(props: EditPostProps) {
         const res = await API.blog.get<Post>(`/posts/${id}`)
         post = res.data
       } else {
-        post = {
-          title: '',
-          summary: '',
-          topicId: 0,
-          tags: [],
-          published: false,
-          body: '',
-          createdAt: '',
-          updatedAt: '',
-        }
+        post = props.item
       }
 
       setPost(post)
