@@ -22,7 +22,7 @@ export default function EditPost(props: EditPostProps) {
   const onSubmit = async () => {
     const method = post?.id ? 'PUT' : 'POST'
 
-    await API.blog(`/posts${post?.id ? `/${post.id}` : ''}`, {
+    await API.admin(`/posts${post?.id ? `/${post.id}` : ''}`, {
       method: method,
       data: post,
     })
