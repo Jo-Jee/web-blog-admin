@@ -13,7 +13,7 @@ const initialState: UserState = {
 }
 
 export const getMyProfile = createAsyncThunk('user/getMyProfile', async () => {
-  const res = await API.user.get<User>('/my-profile')
+  const res = await API.user.get<User>('/me')
   return res.data
 })
 
